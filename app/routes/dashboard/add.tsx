@@ -1,5 +1,3 @@
 export default function AddExpensesPage() {
-  return (
-    <div>add</div>
-  )
+	return <div>add</div>
 }
