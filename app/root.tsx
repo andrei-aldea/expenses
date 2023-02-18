@@ -14,7 +14,7 @@ import Header from './template/Header'
 
 export const meta: MetaFunction = () => ({
 	charset: 'utf-8',
-	title: 'New Remix App',
+	title: 'Expenses',
 	viewport: 'width=device-width,initial-scale=1'
 })
 
@@ -25,12 +25,12 @@ export default function App() {
 				<Meta />
 				<Links />
 			</head>
-			<body className='mx-auto min-w-[22rem] max-w-6xl flex'>
+			<body className='mx-auto flex min-w-[22rem] max-w-6xl'>
 				<Header />
-				<>
+				<main className='mt-12 flex w-full flex-col gap-4 p-10 md:ml-52 md:mt-0'>
 					<Outlet />
-					<Footer />
-				</>
+				</main>
+				<Footer />
 				<ScrollRestoration />
 				<Scripts />
 				<LiveReload />

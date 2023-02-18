@@ -13,3 +13,33 @@
 input:not(:placeholder-shown) + label {
 	@apply -translate-y-7 scale-75;
 }
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+	@apply absolute top-0 left-0 h-0.5 w-6 rotate-0 bg-black duration-300;
+}
+
+.hamburger-middle {
+	@apply translate-y-[7px];
+}
+
+.hamburger-bottom {
+	@apply translate-y-[14px];
+}
+
+.open {
+	@apply rotate-90 ;
+}
+
+.open .hamburger-top {
+	transform: rotate(45deg) translateY(6px) translateX(6px);
+}
+
+.open .hamburger-middle {
+	@apply hidden;
+}
+
+.open .hamburger-bottom {
+	transform: rotate(-45deg) translateY(6px) translateX(-6px);
+}

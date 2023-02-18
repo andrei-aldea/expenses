@@ -12,6 +12,7 @@ export interface NavItem {
 	protected: boolean
 	icon: IconType
 }
+
 const NavLinks: Array<NavItem> = [
 	{
 		to: '/',
@@ -26,39 +27,40 @@ const NavLinks: Array<NavItem> = [
 		icon: RiBarChart2Fill
 	},
 	{
-		to: 'auth',
+		to: '/auth/login',
 		name: 'Login',
 		protected: false,
 		icon: RiAccountCircleFill
 	}
 ]
 
-export default function Navigation() {
-	let defaultClassesLink: string = 'flex items-center gap-2 p-2 text-lg'
+export default function Navigation({
+	mobileNav,
+	setMobileNav
+}: {
+	mobileNav: boolean
+	setMobileNav: any
+}) {
+	let defaultClassesLink: string = 'flex items-center gap-2 p-2 my-1 text-lg'
 
 	return (
-		<nav>
-			<ul className='fixed hidden h-screen flex-col gap-5 border-r border-neutral-300 bg-neutral-200 p-6 drop-shadow-md md:flex'>
-				<li className=' mb-4 select-none text-4xl font-semibold'>
-					E
-					<span className='bg-gradient-to-r from-black to-amber-600 bg-clip-text text-transparent'>
-						xpenses
-					</span>
-				</li>
+		<nav className={`${!mobileNav && 'hidden md:block'} `}>
+			<ul>
 				{NavLinks.map((item, index) => (
 					<li key={index} className={`${item.protected && 'hidden'}`}>
 						<NavLink
 							to={item.to}
 							className={({ isActive }) =>
 								isActive
-									? `rounded-md bg-neutral-300 font-bold ${defaultClassesLink}`
+									? `rounded-md bg-neutral-300 font-medium ${defaultClassesLink}`
 									: `font-medium ${defaultClassesLink}`
 							}
+							onClick={() => {
+								!mobileNav ? setMobileNav(true) : setMobileNav(false)
+							}}
 						>
-							<>
-								{<item.icon />}
-								{item.name}
-							</>
+							{<item.icon />}
+							{item.name}
 						</NavLink>
 					</li>
 				))}

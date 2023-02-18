@@ -1,3 +1,7 @@
 export default function Index() {
-	return <main className='md:ml-52'>Home Page</main>
+	return (
+		<>
+			<div className='text-2xl font-bold'>Home</div>
+		</>
+	)
 }
