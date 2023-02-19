@@ -14,7 +14,7 @@ export default function ChartBar({
 	}
 
 	return (
-		<div className='hover:scale-105'>
+		<div>
 			<div className='flex h-20 flex-col justify-end rounded-md bg-neutral-300 sm:h-28 md:h-36'>
 				<div
 					className='min-w-[1rem] rounded-md bg-black sm:min-w-[2rem]'

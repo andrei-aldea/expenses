@@ -26,7 +26,7 @@ function Chart({ expenses }: { expenses: Array<Expense> }) {
 	const totalMaximum = Math.max(...dataPointValues)
 
 	return (
-		<section className='rounded-md border-2 bg-neutral-200 p-4 '>
+		<section className='rounded-md bg-neutral-200 p-4 '>
 			<ul className='grid grid-cols-12 justify-items-center gap-3 '>
 				{chartDataPoints.map((dataPoint) => (
 					<ChartBar
