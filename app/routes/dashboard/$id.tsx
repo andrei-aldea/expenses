@@ -1,3 +1,5 @@
-export default function IndividualExpensePage() {
-	return <div>$id</div>
+import Form from '~/components/dashboard/Form'
+
+export default function IndividualPage() {
+	return <Form />
 }

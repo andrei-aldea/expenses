@@ -3,34 +3,43 @@ import type { IconType } from 'react-icons'
 import {
 	RiAccountCircleFill,
 	RiBarChart2Fill,
-	RiHome2Fill
+	RiHome2Fill,
+	RiLogoutBoxFill
 } from 'react-icons/ri'
 
 export interface NavItem {
 	to: string
 	name: string
-	protected: boolean
+	show: boolean
 	icon: IconType
 }
+
+const show: boolean = false
 
 const NavLinks: Array<NavItem> = [
 	{
 		to: '/',
 		name: 'Home',
-		protected: false,
+		show: true,
 		icon: RiHome2Fill
 	},
 	{
 		to: '/dashboard',
 		name: 'Dashboard',
-		protected: false,
+		show: !show,
 		icon: RiBarChart2Fill
 	},
 	{
-		to: '/auth/login',
+		to: '/auth',
 		name: 'Login',
-		protected: false,
+		show: !show,
 		icon: RiAccountCircleFill
+	},
+	{
+		to: '/logout',
+		name: 'Logout',
+		show: show,
+		icon: RiLogoutBoxFill
 	}
 ]
 
@@ -47,7 +56,7 @@ export default function Navigation({
 		<nav className={`${!mobileNav && 'hidden md:block'} `}>
 			<ul>
 				{NavLinks.map((item, index) => (
-					<li key={index} className={`${item.protected && 'hidden'}`}>
+					<li key={index} className={`${!item.show && 'hidden'}`}>
 						<NavLink
 							to={item.to}
 							className={({ isActive }) =>

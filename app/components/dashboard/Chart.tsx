@@ -12,9 +12,9 @@ function Chart({ expenses }: { expenses: Array<Expense> }) {
 		{ label: 'Jul', value: 0 },
 		{ label: 'Aug', value: 0 },
 		{ label: 'Sep', value: 0 },
-		{ label: 'Oct', value: 70 },
+		{ label: 'Oct', value: 0 },
 		{ label: 'Nov', value: 0 },
-		{ label: 'Dec', value: 20 }
+		{ label: 'Dec', value: 0 }
 	]
 
 	for (const expense of expenses) {
@@ -26,8 +26,8 @@ function Chart({ expenses }: { expenses: Array<Expense> }) {
 	const totalMaximum = Math.max(...dataPointValues)
 
 	return (
-		<section>
-			<ul className='grid grid-cols-4 justify-items-center gap-3 rounded-md border-2 bg-neutral-200 p-4 sm:grid-cols-12'>
+		<section className='rounded-md border-2 bg-neutral-200 p-4 '>
+			<ul className='grid grid-cols-12 justify-items-center gap-3 '>
 				{chartDataPoints.map((dataPoint) => (
 					<ChartBar
 						key={dataPoint.label}

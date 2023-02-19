@@ -1,6 +1,7 @@
-// import { Outlet } from '@remix-run/react'
-import Chart from '~/components/Chart'
-import ExpenseStatistics from '~/components/Statistics'
+import { Outlet } from '@remix-run/react'
+import Chart from '~/components/dashboard/Chart'
+import List from '~/components/dashboard/List'
+import Statistics from '~/components/dashboard/Statistics'
 
 export interface Expense {
 	id: string
@@ -24,31 +25,16 @@ const DUMMY_EXPENSES: Array<Expense> = [
 	}
 ]
 
-export default function ExpensesPage() {
+export default function DashboardPage() {
 	return (
 		<>
 			<div className='text-2xl font-bold'>Dashboard</div>
 			<Chart expenses={DUMMY_EXPENSES} />
-			<ExpenseStatistics expenses={DUMMY_EXPENSES} />
-			{/* <section className='h-96 w-full rounded-md bg-neutral-300'></section>
-			<section className='grid grid-cols-2'>
-				<ul className='col-span-2 flex flex-col gap-4 sm:col-span-1'>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-					<li className='h-12 w-full rounded-md bg-neutral-300'></li>
-				</ul>
-				<div></div>
+			<Statistics expenses={DUMMY_EXPENSES} />
+			<section className='grid gap-4 lg:grid-cols-2'>
+				<List expenses={DUMMY_EXPENSES} />
+				<Outlet />
 			</section>
-			<Outlet /> */}
 		</>
 	)
 }

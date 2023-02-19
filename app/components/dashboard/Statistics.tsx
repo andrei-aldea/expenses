@@ -17,7 +17,7 @@ function calculateSummaryStatistics(expenses: Array<Expense>) {
 	return { minAmount, maxAmount, sum, avg }
 }
 
-function ExpenseStatistics({ expenses }: { expenses: Array<Expense> }) {
+export default function Statistics({ expenses }: { expenses: Array<Expense> }) {
 	const { minAmount, maxAmount, sum, avg } = useMemo(
 		() => calculateSummaryStatistics(expenses),
 		[expenses]
@@ -53,12 +53,12 @@ function ExpenseStatistics({ expenses }: { expenses: Array<Expense> }) {
 						className='flex flex-col items-center rounded-md bg-neutral-200 p-2'
 					>
 						<span className='sm:text-lg'>{item.title}</span>
-						<span className='text-lg font-bold  sm:text-xl'>€{item.value}</span>
+						<span className='font-bold sm:text-lg  lg:text-xl'>
+							€{item.value}
+						</span>
 					</li>
 				))}
 			</ul>
 		</section>
 	)
 }
-
-export default ExpenseStatistics
