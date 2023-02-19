@@ -17,7 +17,7 @@ export default function ListItem({
 	return (
 		<>
 			<div className='flex items-center gap-3'>
-				<span className='max-w-[9rem] font-bold'>{title}</span>
+				<span className='font-bold'>{title}</span>
 				<span className='text-sm'>€{amount.toFixed(2)}</span>
 			</div>
 			<menu className='flex gap-1 text-neutral-400 md:hidden md:group-hover/item:flex'>

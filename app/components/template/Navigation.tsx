@@ -14,7 +14,7 @@ export interface NavItem {
 	icon: IconType
 }
 
-const show: boolean = false
+const show: boolean = true
 
 const NavLinks: Array<NavItem> = [
 	{
@@ -26,13 +26,13 @@ const NavLinks: Array<NavItem> = [
 	{
 		to: '/dashboard',
 		name: 'Dashboard',
-		show: !show,
+		show: show,
 		icon: RiBarChart2Fill
 	},
 	{
-		to: '/auth',
+		to: '/auth?mode=login',
 		name: 'Login',
-		show: !show,
+		show: show,
 		icon: RiAccountCircleFill
 	},
 	{
@@ -50,8 +50,6 @@ export default function Navigation({
 	mobileNav: boolean
 	setMobileNav: any
 }) {
-	let defaultClassesLink: string = 'flex items-center gap-2 p-2 my-1 text-lg'
-
 	return (
 		<nav className={`${!mobileNav && 'hidden md:block'} `}>
 			<ul>
@@ -61,8 +59,8 @@ export default function Navigation({
 							to={item.to}
 							className={({ isActive }) =>
 								isActive
-									? `rounded-md bg-neutral-300 font-medium ${defaultClassesLink}`
-									: `font-medium ${defaultClassesLink}`
+									? 'my-1 flex items-center gap-2 rounded-md bg-neutral-300 p-2 text-lg font-medium'
+									: 'my-1 flex items-center gap-2 p-2 text-lg font-medium'
 							}
 							onClick={() => {
 								!mobileNav ? setMobileNav(true) : setMobileNav(false)

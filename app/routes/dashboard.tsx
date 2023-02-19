@@ -13,15 +13,39 @@ export interface Expense {
 const DUMMY_EXPENSES: Array<Expense> = [
 	{
 		id: 'e1',
-		title: 'First Expense',
-		amount: 12.99,
-		date: new Date().toISOString()
+		title: 'Boxing Match Ticket',
+		amount: 80.5,
+		date: new Date('2022-05-25').toISOString()
 	},
 	{
 		id: 'e2',
-		title: 'Second Expense',
+		title: 'Groceries',
+		amount: 60.38,
+		date: new Date('2022-04-25').toISOString()
+	},
+	{
+		id: 'e3',
+		title: 'Netflix Subscription',
+		amount: 12.99,
+		date: new Date('2022-06-25').toISOString()
+	},
+	{
+		id: 'e4',
+		title: 'Uber Trip',
+		amount: 24.57,
+		date: new Date('2022-07-25').toISOString()
+	},
+	{
+		id: 'e5',
+		title: 'Phone Case',
 		amount: 16.99,
-		date: new Date().toISOString()
+		date: new Date('2022-08-25').toISOString()
+	},
+	{
+		id: 'e6',
+		title: 'Snacks',
+		amount: 28.32,
+		date: new Date('2022-09-25').toISOString()
 	}
 ]
 

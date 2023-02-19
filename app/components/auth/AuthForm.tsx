@@ -1,9 +1,14 @@
-import { Link } from '@remix-run/react'
+import { Link, useSearchParams } from '@remix-run/react'
 
 export default function AuthForm() {
+	const [searchParams, setSearchParams] = useSearchParams()
+	const authMode = searchParams.get('mode') || 'login'
+
 	return (
 		<>
-			<h2 className='col-span-3 text-2xl font-bold '>Log In</h2>
+			<h2 className='col-span-3 text-2xl font-bold '>
+				{authMode === 'login' ? 'Log In' : 'Sign Up'}
+			</h2>
 			<form
 				method='post'
 				id='auth-form'
@@ -67,10 +72,10 @@ export default function AuthForm() {
 				</div>
 				<div className='flex w-full justify-center'>
 					<Link
-						to={'/auth'}
+						to={authMode === 'login' ? '?mode=signup' : '?mode=login'}
 						className='text-center underline underline-offset-2 hover:text-neutral-500'
 					>
-						Go to Sign Up
+						{authMode === 'login' ? 'Go to Sign Up' : 'Go back to Log In'}
 					</Link>
 				</div>
 			</form>

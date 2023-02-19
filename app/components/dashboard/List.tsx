@@ -18,11 +18,12 @@ export default function List({ expenses }: { expenses: Array<Expense> }) {
 					/>
 				</li>
 			))}
-			<li className='flex max-w-max p-2'>
+			<li className='flex max-w-max '>
 				<Link
 					to={'/dashboard/add'}
-					className='rounded-full hover:bg-neutral-300'
+					className='flex rounded-md p-2 hover:bg-neutral-300'
 				>
+					<span>Add</span>
 					<RiAddFill size={24} />
 				</Link>
 			</li>

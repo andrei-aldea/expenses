@@ -1,3 +1,4 @@
+import { Link } from '@remix-run/react'
 import { useState } from 'react'
 import Navigation from '~/components/template/Navigation'
 
@@ -10,12 +11,12 @@ export default function Header() {
 				mobileNav ? 'bg-neutral-200 ' : 'bg-white'
 			} border-m fixed z-10 w-screen flex-col gap-5 border-neutral-300 p-4 drop-shadow-md md:flex md:h-screen md:w-auto md:border-r md:bg-neutral-200`}
 		>
-			<div className='select-none text-4xl font-semibold'>
+			<Link to='/' className='select-none text-4xl font-semibold'>
 				E
 				<span className='bg-gradient-to-r from-black to-amber-600 bg-clip-text text-transparent'>
 					xpenses
 				</span>
-			</div>
+			</Link>
 			<Navigation mobileNav={mobileNav} setMobileNav={setMobileNav} />
 			<button
 				onClick={() => {
