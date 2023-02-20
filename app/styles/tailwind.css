@@ -29,7 +29,7 @@ input:not(:placeholder-shown) + label {
 }
 
 .open {
-	@apply rotate-90 ;
+	@apply rotate-90;
 }
 
 .open .hamburger-top {
@@ -42,4 +42,9 @@ input:not(:placeholder-shown) + label {
 
 .open .hamburger-bottom {
 	transform: rotate(-45deg) translateY(6px) translateX(-6px);
+}
+
+.bg-clip-text {
+	background-clip: text;
+	-webkit-background-clip: text;
 }

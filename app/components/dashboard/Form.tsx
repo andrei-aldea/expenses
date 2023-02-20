@@ -1,8 +1,10 @@
-import { Link, useActionData } from '@remix-run/react'
+import { Form, Link, useActionData, useNavigation } from '@remix-run/react'
 
-export default function Form() {
+export default function ExpenseForm() {
 	const today = new Date().toISOString().slice(0, 10)
 	const validationErrors = useActionData()
+	const navigation = useNavigation()
+	const isSubmitting = navigation.state !== 'idle'
 
 	return (
 		<div className='flex flex-col gap-4'>
@@ -18,7 +20,7 @@ export default function Form() {
 					))}
 				</ul>
 			)}
-			<form
+			<Form
 				method='post'
 				className='grid max-h-64 grid-cols-2 gap-4 rounded-md bg-neutral-200 p-4'
 			>
@@ -79,11 +81,14 @@ export default function Form() {
 					>
 						Cancel
 					</Link>
-					<button className='w-full rounded-md border-2 border-black bg-neutral-900 p-2 text-center font-bold text-white drop-shadow-md'>
-						Save
+					<button
+						disabled={isSubmitting}
+						className='w-full rounded-md border-2 border-black bg-neutral-900 p-2 text-center font-bold text-white drop-shadow-md'
+					>
+						{isSubmitting ? 'Saving...' : 'Save'}
 					</button>
 				</div>
-			</form>
+			</Form>
 		</div>
 	)
 }
