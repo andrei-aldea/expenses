@@ -7,7 +7,7 @@ export default function AuthForm() {
 	return (
 		<>
 			<h2 className='col-span-3 text-2xl font-bold '>
-				{authMode === 'login' ? 'Log In' : 'Sign Up'}
+				{authMode === 'signup' ? 'Sign Up' : 'Log In'}
 			</h2>
 			<form
 				method='post'
@@ -72,10 +72,10 @@ export default function AuthForm() {
 				</div>
 				<div className='flex w-full justify-center'>
 					<Link
-						to={authMode === 'login' ? '?mode=signup' : '?mode=login'}
+						to={authMode === 'signup' ? '?mode=login' : '?mode=signup'}
 						className='text-center underline underline-offset-2 hover:text-neutral-500'
 					>
-						{authMode === 'login' ? 'Go to Sign Up' : 'Go back to Log In'}
+						{authMode === 'signup' ? 'Go back to Log In' : 'Go to Sign Up'}
 					</Link>
 				</div>
 			</form>

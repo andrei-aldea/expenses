@@ -7,7 +7,6 @@ export default function Form() {
 		<form
 			method='post'
 			className='grid max-h-64 grid-cols-2 gap-4 rounded-md bg-neutral-200 p-4'
-			id='expense-form'
 		>
 			<div className='col-span-2 flex rounded-md border-[3px] border-black bg-neutral-300 ring-amber-600 focus-within:ring'>
 				<label
