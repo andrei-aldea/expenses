@@ -24,7 +24,7 @@ export async function action({ params, request }: ActionArgs) {
 		}
 
 		await updateExpense(expenseId, title, amount, date)
-		return redirect('/expenses')
+		return redirect('/dashboard')
 	} else if (request.method === 'DELETE') {
 		await deleteExpense(expenseId)
 		return { deletedId: expenseId }

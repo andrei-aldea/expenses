@@ -1,5 +1,5 @@
+import type { Expense } from '@prisma/client'
 import { useMemo } from 'react'
-import type { Expense } from '~/routes/dashboard'
 
 interface Statistic {
 	title: string

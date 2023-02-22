@@ -1,6 +1,6 @@
+import type { Expense } from '@prisma/client'
 import { Link } from '@remix-run/react'
 import { RiAddFill } from 'react-icons/ri'
-import type { Expense } from '~/routes/dashboard'
 import ListItem from './ListItem'
 
 export default function List({ expenses }: { expenses: Array<Expense> }) {

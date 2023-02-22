@@ -1,4 +1,4 @@
-import type { Expense } from '~/routes/dashboard'
+import type { Expense } from '@prisma/client'
 import ChartBar from './ChartBar'
 
 function Chart({ expenses }: { expenses: Array<Expense> }) {

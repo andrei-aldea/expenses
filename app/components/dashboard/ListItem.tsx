@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react'
+import { Link, useFetcher } from '@remix-run/react'
 import { RiCloseFill, RiEdit2Fill } from 'react-icons/ri'
 
 export default function ListItem({
@@ -10,8 +10,13 @@ export default function ListItem({
 	title: string
 	amount: number
 }) {
+	const fetcher = useFetcher()
 	function deleteItemHandler() {
-		// tbd
+		fetcher.submit(null, { method: 'delete', action: `/dashboard/${id}` })
+	}
+
+	if (fetcher.state !== 'idle') {
+		return <span>Deleting...</span>
 	}
 
 	return (

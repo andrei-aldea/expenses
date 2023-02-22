@@ -1,9 +1,48 @@
-import { Form, Link, useActionData, useNavigation } from '@remix-run/react'
+import type { Expense } from '@prisma/client'
+import {
+	Form,
+	Link,
+	useActionData,
+	useMatches,
+	useNavigation,
+	useParams
+} from '@remix-run/react'
 
 export default function ExpenseForm() {
 	const today = new Date().toISOString().slice(0, 10)
 	const validationErrors = useActionData()
 	const navigation = useNavigation()
+	const params = useParams()
+	const matches = useMatches()
+	const expenses = matches?.find(
+		(match) => match?.id === 'routes/dashboard'
+	)?.data
+	const expenseData = expenses.find(
+		(expense: Expense) => expense.id === params.id
+	)
+
+	if (params.id && !expenseData) {
+		return (
+			<div className='flex max-h-14 w-full justify-between rounded-md bg-neutral-200 p-4'>
+				<div>Invalid expense id.</div>
+				<Link to='..' className='hover:underline'>
+					Close
+				</Link>
+			</div>
+		)
+	}
+	const defaultValues = expenseData
+		? {
+				title: expenseData.title,
+				amount: expenseData.amount,
+				date: expenseData.date
+		  }
+		: {
+				title: '',
+				amount: '',
+				date: ''
+		  }
+
 	const isSubmitting = navigation.state !== 'idle'
 
 	return (
@@ -21,7 +60,7 @@ export default function ExpenseForm() {
 				</ul>
 			)}
 			<Form
-				method='post'
+				method={expenseData ? 'patch' : 'post'}
 				className='grid max-h-64 grid-cols-2 gap-4 rounded-md bg-neutral-200 p-4'
 			>
 				<div className='col-span-2 flex rounded-md border-[3px] border-black bg-neutral-300 ring-amber-600 focus-within:ring'>
@@ -35,9 +74,10 @@ export default function ExpenseForm() {
 						type='text'
 						id='title'
 						name='title'
-						className='w-full rounded-r-md bg-neutral-200 p-2 outline-none'
-						required
 						maxLength={16}
+						required
+						defaultValue={defaultValues.title}
+						className='w-full rounded-r-md bg-neutral-200 p-2 outline-none'
 					/>
 				</div>
 				<div className='col-span-2 flex rounded-md border-[3px] border-black bg-neutral-300 ring-amber-600 focus-within:ring'>
@@ -55,6 +95,7 @@ export default function ExpenseForm() {
 						min='0'
 						step='0.01'
 						required
+						defaultValue={defaultValues.amount}
 						className='w-full rounded-r-md bg-neutral-200 p-2 pl-4 outline-none'
 					/>
 				</div>
@@ -71,6 +112,9 @@ export default function ExpenseForm() {
 						name='date'
 						max={today}
 						required
+						defaultValue={
+							defaultValues.date ? defaultValues.date.slice(0, 10) : ''
+						}
 						className='w-full rounded-r-md bg-neutral-200 p-2 outline-none'
 					/>
 				</div>
