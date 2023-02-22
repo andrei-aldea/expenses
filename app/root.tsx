@@ -32,7 +32,7 @@ function Document({
 	return (
 		<html lang='en'>
 			<head>
-				<title>{title}</title>
+				{title && <title>{title}</title>}
 				<Meta />
 				<Links />
 			</head>
@@ -70,8 +70,8 @@ export function CatchBoundary() {
 							'Something went wrong. Please try again later.'}
 					</p>
 					<p>
-						Back to
-						<Link className='hover:underline' to='/'>
+						Back to{' '}
+						<Link className='font-semibold  hover:underline' to='/'>
 							safety
 						</Link>
 						.
@@ -89,8 +89,8 @@ export function ErrorBoundary() {
 				<Error title='An error occurred'>
 					<p>Something went wrong. Please try again later.</p>
 					<p>
-						Back to
-						<Link className='hover:underline' to='/'>
+						Back to{' '}
+						<Link className='font-semibold hover:underline' to='/'>
 							safety
 						</Link>
 						.

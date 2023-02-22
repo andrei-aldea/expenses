@@ -27,3 +27,10 @@ export async function action({ request }: ActionArgs) {
 		// signup logic (create user)
 	}
 }
+
+export function meta() {
+	return {
+		title: 'Authentification',
+		'og:title': 'Authentification'
+	}
+}

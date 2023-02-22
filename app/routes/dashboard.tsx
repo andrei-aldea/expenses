@@ -23,3 +23,9 @@ export default function DashboardPage() {
 export function loader() {
 	return getExpenses()
 }
+export function meta () {
+	return {
+		title: 'Dashboard',
+		'og:title': 'Dashboard',
+	}
+}
