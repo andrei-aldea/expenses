@@ -1,13 +1,17 @@
-import { Form, Link, useSearchParams } from '@remix-run/react'
+import { Form, Link, useNavigation, useSearchParams } from '@remix-run/react'
 
 export default function AuthForm() {
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 	const authMode = searchParams.get('mode') || 'login'
+	const navigation = useNavigation()
+	const isSubmitting = navigation.state !== 'idle'
 
+	const submitBtnCaption =
+		authMode == 'login' ? 'Go to Sign Up' : 'Go back to Log In'
 	return (
 		<>
 			<h2 className='col-span-3 text-2xl font-bold '>
-				{authMode === 'login' ? 'Log In' : 'Sign Up'}
+				{authMode == 'login' ? 'Log In' : 'Sign Up'}
 			</h2>
 			<Form
 				method='post'
@@ -49,6 +53,7 @@ export default function AuthForm() {
 				</div>
 				<div className='flex gap-4'>
 					<button
+						disabled={isSubmitting}
 						type='submit'
 						className='mb-2 flex w-full items-center justify-center space-x-1 rounded-md  border-2 border-black bg-neutral-900 p-2 font-bold text-white drop-shadow-md'
 					>
@@ -75,7 +80,7 @@ export default function AuthForm() {
 						to={authMode === 'login' ? '?mode=signup' : '?mode=login'}
 						className='text-center underline underline-offset-2 hover:text-neutral-500'
 					>
-						{authMode === 'login' ? 'Go to Sign Up' : 'Go back to Log In'}
+						{isSubmitting ? 'Authenticating...' : submitBtnCaption}
 					</Link>
 				</div>
 			</Form>
