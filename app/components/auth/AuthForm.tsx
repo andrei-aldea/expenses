@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from '@remix-run/react'
+import { Form, Link, useSearchParams } from '@remix-run/react'
 
 export default function AuthForm() {
 	const [searchParams, setSearchParams] = useSearchParams()
@@ -7,9 +7,9 @@ export default function AuthForm() {
 	return (
 		<>
 			<h2 className='col-span-3 text-2xl font-bold '>
-				{authMode === 'signup' ? 'Sign Up' : 'Log In'}
+				{authMode === 'login' ? 'Log In' : 'Sign Up'}
 			</h2>
-			<form
+			<Form
 				method='post'
 				id='auth-form'
 				className=' col-span-3 space-y-4 rounded-md bg-neutral-200 p-4 sm:col-span-2 '
@@ -72,13 +72,13 @@ export default function AuthForm() {
 				</div>
 				<div className='flex w-full justify-center'>
 					<Link
-						to={authMode === 'signup' ? '?mode=login' : '?mode=signup'}
+						to={authMode === 'login' ? '?mode=signup' : '?mode=login'}
 						className='text-center underline underline-offset-2 hover:text-neutral-500'
 					>
-						{authMode === 'signup' ? 'Go back to Log In' : 'Go to Sign Up'}
+						{authMode === 'login' ? 'Go to Sign Up' : 'Go back to Log In'}
 					</Link>
 				</div>
-			</form>
+			</Form>
 		</>
 	)
 }

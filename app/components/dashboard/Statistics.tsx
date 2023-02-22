@@ -8,13 +8,17 @@ interface Statistic {
 }
 
 function calculateSummaryStatistics(expenses: Array<Expense>) {
-	const amounts = expenses.map((expense) => +expense.amount)
-	const maxAmount = Math.max(...amounts)
-	const minAmount = Math.min(...amounts)
-	const sum = expenses.reduce((prevVal, curVal) => curVal.amount + prevVal, 0)
-	const avg = sum / expenses.length
+	if (expenses.length > 0) {
+		const amounts = expenses.map((expense) => +expense.amount)
+		const maxAmount = Math.max(...amounts)
+		const minAmount = Math.min(...amounts)
+		const sum = expenses.reduce((prevVal, curVal) => curVal.amount + prevVal, 0)
+		const avg = sum / expenses.length
 
-	return { minAmount, maxAmount, sum, avg }
+		return { minAmount, maxAmount, sum, avg }
+	} else {
+		return { minAmount: 0, maxAmount: 0, sum: 0, avg: 0 }
+	}
 }
 
 export default function Statistics({ expenses }: { expenses: Array<Expense> }) {

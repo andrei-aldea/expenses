@@ -31,6 +31,7 @@ export default function ExpenseForm() {
 			</div>
 		)
 	}
+	
 	const defaultValues = expenseData
 		? {
 				title: expenseData.title,

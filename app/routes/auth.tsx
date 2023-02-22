@@ -1,3 +1,4 @@
+import type { ActionArgs } from '@remix-run/node'
 import AuthForm from '~/components/auth/AuthForm'
 
 export default function AuthPage() {
@@ -9,4 +10,20 @@ export default function AuthPage() {
 			</div>
 		</section>
 	)
+}
+
+export async function action({ request }: ActionArgs) {
+	const searchParams = new URL(request.url).searchParams
+	const authMode = searchParams.get('mode') || 'login'
+
+	const formData = await request.formData()
+	const credentials = Object.fromEntries(formData)
+
+	// validate user input
+
+	if (authMode === 'login') {
+		// login logic
+	} else {
+		// signup logic (create user)
+	}
 }
