@@ -1,7 +1,11 @@
-type validationErrors = {
+type expenseValidationErrors = {
 	title?: string
 	amount?: string
 	date?: string
+}
+type userValidationErrors = {
+	email?: string
+	password?: string
 }
 function isValidTitle(value: string) {
 	return value && value.trim().length > 0 && value.trim().length <= 16
@@ -21,7 +25,7 @@ export function validateExpenseInput(
 	amount: number,
 	date: string
 ) {
-	let validationErrors: validationErrors = {}
+	let validationErrors: expenseValidationErrors = {}
 
 	if (!isValidTitle(title)) {
 		validationErrors.title =
@@ -35,6 +39,31 @@ export function validateExpenseInput(
 
 	if (!isValidDate(date)) {
 		validationErrors.date = 'Invalid date. Must be a date before today.'
+	}
+
+	if (Object.keys(validationErrors).length > 0) {
+		throw validationErrors
+	}
+}
+
+function isValidEmail(value: string) {
+	return value && value.includes('@')
+}
+
+function isValidPassword(value: string) {
+	return value && value.trim().length >= 7
+}
+
+export function validateCredentials(email: string, password: string) {
+	let validationErrors: userValidationErrors = {}
+
+	if (!isValidEmail(email)) {
+		validationErrors.email = 'Invalid email address.'
+	}
+
+	if (!isValidPassword(password)) {
+		validationErrors.password =
+			'Invalid password. Must be at least 7 characters long.'
 	}
 
 	if (Object.keys(validationErrors).length > 0) {

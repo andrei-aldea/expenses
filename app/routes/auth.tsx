@@ -1,13 +1,11 @@
 import type { ActionArgs } from '@remix-run/node'
 import AuthForm from '~/components/auth/AuthForm'
+import { validateCredentials } from '~/data/validation.server'
 
 export default function AuthPage() {
 	return (
 		<section className='grid grid-cols-3 gap-4'>
 			<AuthForm />
-			<div className='col-span-3 h-full w-full rounded-md bg-neutral-200 p-4 font-bold sm:col-span-1'>
-				Use an account in order to use the dashboard and all of it's features.
-			</div>
 		</section>
 	)
 }
@@ -17,9 +15,14 @@ export async function action({ request }: ActionArgs) {
 	const authMode = searchParams.get('mode') || 'login'
 
 	const formData = await request.formData()
-	const credentials = Object.fromEntries(formData)
+	let email = formData.get('title')! as string
+	let password = formData.get('title')! as string
 
-	// validate user input
+	try {
+		validateCredentials(email, password)
+	} catch (error) {
+		return error
+	}
 
 	if (authMode === 'login') {
 		// login logic

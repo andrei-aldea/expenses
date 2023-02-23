@@ -1,8 +1,15 @@
-import { Form, Link, useNavigation, useSearchParams } from '@remix-run/react'
+import {
+	Form,
+	Link,
+	useActionData,
+	useNavigation,
+	useSearchParams
+} from '@remix-run/react'
 
 export default function AuthForm() {
 	const [searchParams] = useSearchParams()
 	const authMode = searchParams.get('mode') || 'login'
+	const validationErrors = useActionData()
 	const navigation = useNavigation()
 	const isSubmitting = navigation.state !== 'idle'
 
@@ -15,7 +22,6 @@ export default function AuthForm() {
 			</h2>
 			<Form
 				method='post'
-				id='auth-form'
 				className=' col-span-3 space-y-4 rounded-md bg-neutral-200 p-4 sm:col-span-2 '
 			>
 				<div className='flex rounded-md border-[3px] border-black bg-neutral-300 ring-amber-600 focus-within:ring'>
@@ -84,6 +90,18 @@ export default function AuthForm() {
 					</Link>
 				</div>
 			</Form>
+			{validationErrors && (
+				<ul className='col-span-3 flex w-full flex-col gap-4 sm:col-span-1 lg:flex-col'>
+					{Object.values(validationErrors).map((error, index) => (
+						<li
+							className='w-full rounded-md bg-red-400 p-2 text-white '
+							key={index}
+						>
+							{error as string}
+						</li>
+					))}
+				</ul>
+			)}
 		</>
 	)
 }
