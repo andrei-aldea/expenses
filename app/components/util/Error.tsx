@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { RiErrorWarningFill } from 'react-icons/ri'
 
 export default function Error({

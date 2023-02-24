@@ -1,47 +1,11 @@
-import { NavLink } from '@remix-run/react'
-import type { IconType } from 'react-icons'
+import { Form, NavLink, useLoaderData } from '@remix-run/react'
 import {
 	RiAccountCircleFill,
 	RiBarChart2Fill,
 	RiHome2Fill,
 	RiLogoutBoxFill
 } from 'react-icons/ri'
-
-export interface NavItem {
-	to: string
-	name: string
-	show: boolean
-	icon: IconType
-}
-
-const show: boolean = true
-
-const NavLinks: Array<NavItem> = [
-	{
-		to: '/',
-		name: 'Home',
-		show: true,
-		icon: RiHome2Fill
-	},
-	{
-		to: '/dashboard',
-		name: 'Dashboard',
-		show: show,
-		icon: RiBarChart2Fill
-	},
-	{
-		to: '/auth?mode=login',
-		name: 'Login',
-		show: show,
-		icon: RiAccountCircleFill
-	},
-	{
-		to: '/logout',
-		name: 'Logout',
-		show: show,
-		icon: RiLogoutBoxFill
-	}
-]
+import { getUserFromSession } from '~/data/auth.server'
 
 export default function Navigation({
 	mobileNav,
@@ -50,13 +14,30 @@ export default function Navigation({
 	mobileNav: boolean
 	setMobileNav: any
 }) {
+	const userId = useLoaderData()
 	return (
 		<nav className={`${!mobileNav && 'hidden md:block'} `}>
 			<ul>
-				{NavLinks.map((item, index) => (
-					<li key={index} className={`${!item.show && 'hidden'}`}>
+				<li>
+					<NavLink
+						to={'/'}
+						className={({ isActive }) =>
+							isActive
+								? 'my-1 flex items-center gap-2 rounded-md bg-neutral-300 p-2 text-lg font-medium'
+								: 'my-1 flex items-center gap-2 p-2 text-lg font-medium'
+						}
+						onClick={() => {
+							!mobileNav ? setMobileNav(true) : setMobileNav(false)
+						}}
+					>
+						<RiHome2Fill />
+						Home
+					</NavLink>
+				</li>
+				{userId && (
+					<li>
 						<NavLink
-							to={item.to}
+							to={'/dashboard'}
 							className={({ isActive }) =>
 								isActive
 									? 'my-1 flex items-center gap-2 rounded-md bg-neutral-300 p-2 text-lg font-medium'
@@ -66,11 +47,44 @@ export default function Navigation({
 								!mobileNav ? setMobileNav(true) : setMobileNav(false)
 							}}
 						>
-							{<item.icon />}
-							{item.name}
+							<RiBarChart2Fill />
+							Dashboard
 						</NavLink>
 					</li>
-				))}
+				)}
+				{!userId && (
+					<li>
+						<NavLink
+							to={'/auth'}
+							className={({ isActive }) =>
+								isActive
+									? 'my-1 flex items-center gap-2 rounded-md bg-neutral-300 p-2 text-lg font-medium'
+									: 'my-1 flex items-center gap-2 p-2 text-lg font-medium'
+							}
+							onClick={() => {
+								!mobileNav ? setMobileNav(true) : setMobileNav(false)
+							}}
+						>
+							<RiAccountCircleFill />
+							Login
+						</NavLink>
+					</li>
+				)}
+				{userId && (
+					<Form method='post' action='/logout'>
+						<li>
+							<button
+								className='my-1 flex items-center gap-2 p-2 text-lg font-medium'
+								onClick={() => {
+									!mobileNav ? setMobileNav(true) : setMobileNav(false)
+								}}
+							>
+								<RiLogoutBoxFill />
+								Logout
+							</button>
+						</li>
+					</Form>
+				)}
 			</ul>
 		</nav>
 	)

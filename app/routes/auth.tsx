@@ -1,5 +1,6 @@
 import type { ActionArgs } from '@remix-run/node'
 import AuthForm from '~/components/auth/AuthForm'
+import { login, signup } from '~/data/auth.server'
 import { validateCredentials } from '~/data/validation.server'
 
 export default function AuthPage() {
@@ -15,8 +16,8 @@ export async function action({ request }: ActionArgs) {
 	const authMode = searchParams.get('mode') || 'login'
 
 	const formData = await request.formData()
-	let email = formData.get('title')! as string
-	let password = formData.get('title')! as string
+	let email = formData.get('email')! as string
+	let password = formData.get('password')! as string
 
 	try {
 		validateCredentials(email, password)
@@ -24,10 +25,16 @@ export async function action({ request }: ActionArgs) {
 		return error
 	}
 
-	if (authMode === 'login') {
-		// login logic
-	} else {
-		// signup logic (create user)
+	try {
+		if (authMode === 'login') {
+			return await login(email, password)
+		} else {
+			return await signup(email, password)
+		}
+	} catch (error: any) {
+		if (error.status === 422) {
+			return { credentials: error.message }
+		}
 	}
 }
 

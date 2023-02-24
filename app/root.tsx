@@ -14,6 +14,7 @@ import type { ReactNode } from 'react'
 import Footer from './components/template/Footer'
 import Header from './components/template/Header'
 import Error from './components/util/Error'
+import { getUserFromSession } from './data/auth.server'
 import styles from './styles/tailwind.css'
 
 export const meta: MetaFunction = () => ({
@@ -21,6 +22,10 @@ export const meta: MetaFunction = () => ({
 	title: 'Expenses',
 	viewport: 'width=device-width,initial-scale=1'
 })
+
+export function loader({ request }: { request: Request }) {
+	return getUserFromSession(request)
+}
 
 function Document({
 	title,

@@ -13,8 +13,7 @@ export default function Header() {
 		>
 			<Link to='/' className='select-none text-4xl font-semibold'>
 				E
-				<span className='bg-gradient-to-r from-black to-amber-600 bg-clip-text text-transparent'
-				>
+				<span className='bg-gradient-to-r from-black to-amber-600 bg-clip-text text-transparent'>
 					xpenses
 				</span>
 			</Link>
