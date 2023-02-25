@@ -1,6 +1,7 @@
 import type { ActionArgs } from '@remix-run/node'
 import { redirect } from '@remix-run/node'
 import Form from '~/components/dashboard/Form'
+import { requireUserSession } from '~/data/auth.server'
 import { addExpense } from '~/data/expenses.server'
 import { validateExpenseInput } from '~/data/validation.server'
 
@@ -9,6 +10,7 @@ export default function AddPage() {
 }
 
 export async function action({ request }: ActionArgs) {
+	const userId = await requireUserSession(request)
 	const formData = await request.formData()
 	let title = formData.get('title')! as string
 	let amount = Number(formData.get('amount')! as string)
@@ -20,6 +22,6 @@ export async function action({ request }: ActionArgs) {
 		return error
 	}
 
-	await addExpense(title, amount, date)
+	await addExpense(title, amount, date, userId)
 	return redirect('/dashboard')
 }

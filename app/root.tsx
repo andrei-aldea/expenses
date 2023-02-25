@@ -45,8 +45,8 @@ function Document({
 				<Header />
 				<main className='mt-14 flex w-full flex-col gap-4 p-6 sm:p-10 md:ml-52 md:mt-0 md:p-6 lg:p-10'>
 					{children}
+					<Footer />
 				</main>
-				<Footer />
 				<ScrollRestoration />
 				<Scripts />
 				<LiveReload />

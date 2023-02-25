@@ -40,7 +40,6 @@ export async function action({ request }: ActionArgs) {
 
 export function meta() {
 	return {
-		title: 'Authentification',
-		'og:title': 'Authentification'
+		title: 'Expenses | Authentification'
 	}
 }

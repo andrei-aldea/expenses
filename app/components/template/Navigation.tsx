@@ -1,11 +1,10 @@
 import { Form, NavLink, useLoaderData } from '@remix-run/react'
 import {
-	RiAccountCircleFill,
 	RiBarChart2Fill,
 	RiHome2Fill,
+	RiLoginBoxFill,
 	RiLogoutBoxFill
 } from 'react-icons/ri'
-import { getUserFromSession } from '~/data/auth.server'
 
 export default function Navigation({
 	mobileNav,
@@ -55,7 +54,7 @@ export default function Navigation({
 				{!userId && (
 					<li>
 						<NavLink
-							to={'/auth'}
+							to={'/auth?mode=login'}
 							className={({ isActive }) =>
 								isActive
 									? 'my-1 flex items-center gap-2 rounded-md bg-neutral-300 p-2 text-lg font-medium'
@@ -65,7 +64,7 @@ export default function Navigation({
 								!mobileNav ? setMobileNav(true) : setMobileNav(false)
 							}}
 						>
-							<RiAccountCircleFill />
+							<RiLoginBoxFill />
 							Login
 						</NavLink>
 					</li>
