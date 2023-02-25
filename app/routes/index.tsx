@@ -20,7 +20,6 @@ export default function IndexPage() {
 export function meta() {
 	return {
 		title: 'Expenses | Home',
-		description: 'Manage your expenses with ease.'
 	}
 }
 

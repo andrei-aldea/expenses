@@ -20,6 +20,8 @@ import styles from './styles/tailwind.css'
 export const meta: MetaFunction = () => ({
 	charset: 'utf-8',
 	title: 'Expenses',
+	description: 'Manage your expenses with ease.',
+	keywords: 'Expenses App, CRUD App',
 	viewport: 'width=device-width,initial-scale=1'
 })
 
